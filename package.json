@@ -69,6 +69,40 @@
     "tape": "4.6.0",
     "validate-commit-msg": "^2.7.0"
   },
+  "bundleDependencies": [
+    "camelcase-keys",
+    "caw",
+    "chalk",
+    "commondir",
+    "cross-spawn",
+    "debug",
+    "got",
+    "gunzip-maybe",
+    "is-ci",
+    "is-retry-allowed",
+    "lockfile",
+    "meow",
+    "mkdirp",
+    "mz",
+    "node-gyp",
+    "normalize-path",
+    "npm-package-arg",
+    "observatory",
+    "os-homedir",
+    "rc",
+    "read-pkg-up",
+    "registry-auth-token",
+    "registry-url",
+    "retry",
+    "rimraf",
+    "sanitize-filename",
+    "semver",
+    "sorted-object",
+    "supports-color",
+    "tar-fs",
+    "thenify",
+    "throat"
+  ],
   "directories": {
     "test": "test"
   },
@@ -94,8 +128,7 @@
     "lint": "eslint bin/ test/ lib/ .scripts/",
     "test": "npm run lint && node test | tap-spec",
     "posttest": "rimraf .tmp",
-    "prerelease": "npm test",
-    "release": "sh .scripts/release.sh"
+    "prerelease": "npm test"
   },
   "config": {
     "commitizen": {
