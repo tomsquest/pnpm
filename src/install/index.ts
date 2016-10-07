@@ -90,7 +90,7 @@ export default async function install (ctx: InstallContext, pkgMeta: PackageMeta
   // Dependency path to the current package. Not actually needed anmyore
   // outside getting its length
   // => ['babel-core@6.4.5', 'babylon@6.4.5', 'babel-runtime@5.8.35']
-  const keypath = (options && options.keypath || [])
+  const keypath: string[] = options && options.keypath || []
 
   const log: InstallLog = logger.fork(spec).log.bind(null, 'progress', pkgMeta.rawSpec)
   let installedPkg: InstalledPackage
@@ -108,6 +108,9 @@ export default async function install (ctx: InstallContext, pkgMeta: PackageMeta
         root: options.parentRoot || options.root,
         linkLocal: options.linkLocal
       })
+      if (keypath.indexOf(res.id) !== -1) {
+        return ctx.installs[res.id]
+      }
       const freshPkg: PackageContext = saveResolution(res)
       log('resolved', freshPkg)
       await mkdirp(modules)
