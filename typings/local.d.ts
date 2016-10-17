@@ -251,3 +251,8 @@ declare module 'lodash.memoize' {
   const anything: any;
   export = anything;
 }
+
+declare module 'roadrunner' {
+  const anything: any;
+  export = anything;
+}

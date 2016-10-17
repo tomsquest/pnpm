@@ -1,4 +1,12 @@
 #!/usr/bin/env node
+import home = require('os-homedir')
+import path = require('path')
+const CACHE_FILENAME = path.join(home(), '.pnpm', '.roadrunner.json');
+import roadrunner = require('roadrunner')
+
+roadrunner.load(CACHE_FILENAME)
+roadrunner.setup(CACHE_FILENAME)
+
 // NOTE: This should be done as soon as possible because the debug
 // package reads the env variable only once
 if (~process.argv.indexOf('--debug')) {
