@@ -23,7 +23,7 @@ async function getDirectories (srcPath: string): Promise<string[]> {
     dirs = []
   }
   return dirs
-    .filter(relativePath => relativePath[0] !== '.') // ignore directories like .bin, .store, etc
+    .filter(relativePath => relativePath[0] !== '.' && !relativePath.endsWith('.node_modules')) // ignore directories like .bin, .store, etc
     .map(relativePath => path.join(srcPath, relativePath))
     .filter(absolutePath => fs.statSync(absolutePath).isDirectory())
 }
