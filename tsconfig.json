@@ -41,6 +41,7 @@
     "src/cmd/link.ts",
     "src/cmd/prune.ts",
     "src/cmd/publish.ts",
+    "src/cmd/run.ts",
     "src/cmd/runNpm.ts",
     "src/cmd/uninstall.ts",
     "src/cmd/update.ts",
