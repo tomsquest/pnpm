@@ -74,7 +74,7 @@ async function installMultiple (ctx: InstallContext, pkgsMap: Dependencies, modu
       try {
         const pkg = await install(pkgRawSpec, modules, ctx, options)
         const modulesInStore = path.join(options.nodeModulesStore, pkg.id)
-        await linkDir(modulesInStore, path.join(modules, `${pkg.pkg.name}.node_modules`))
+        await linkDir(modulesInStore, path.join(modules, `${pkg.pkg.name}+node_modules`))
         return pkg
       } catch (err) {
         if (options.optional) {
