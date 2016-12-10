@@ -717,6 +717,18 @@ test('should update subdep on second install', async function (t) {
   t.ok(await exists('node_modules/.store/dep-of-pkg-with-1-dep@1.1.0'), 'should update to dep-of-pkg-with-1-dep@1.1.0')
 })
 
+test('should install dependency in second project', async function (t) {
+  prepare()
+
+  await installPkgs(['pkg-with-1-dep'], testDefaults({save: true, storePath: '../store'}))
+
+  prepare()
+
+  await installPkgs(['pkg-with-1-dep'], testDefaults({save: true, storePath: '../store'}))
+
+  t.equal(require(path.join(process.cwd(), 'node_modules', 'pkg-with-1-dep'))().name, 'dep-of-pkg-with-1-dep')
+})
+
 test('should install flat tree', async function (t) {
   if (!preserveSymlinks) {
     t.skip('this test only for NodeJS with --preserve-symlinks support')
