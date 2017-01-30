@@ -11,7 +11,9 @@
   "scripts": {
     "info": "npm-scripts-info",
     "?commit": "echo 'Run Git commit wizard'",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "test": "sh .scripts/pnpm-x-for-all-packages.sh test",
+    "postinstall": "sh .scripts/pnpm-x-for-all-packages.sh install"
   },
   "config": {
     "commitizen": {
