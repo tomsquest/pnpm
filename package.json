@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "commitizen": "^2.8.6",
+    "cz-conventional-changelog": "^1.2.0",
+    "ghooks": "^2.0.0",
+    "npm-scripts-info": "^0.3.6",
+    "validate-commit-msg": "^2.7.0"
+  },
+  "scripts": {
+    "info": "npm-scripts-info",
+    "?commit": "echo 'Run Git commit wizard'",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "node ./node_modules/validate-commit-msg/index.js"
+    }
+  }
+}
