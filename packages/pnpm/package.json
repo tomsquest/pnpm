@@ -134,7 +134,7 @@
     "?commit": "echo 'Run Git commit wizard'",
     "commit": "git-cz",
     "cover": "istanbul cover test/index.js",
-    "lint": "standard && tslint -c tslint.json --project .",
+    "lint": "standard .scripts && tslint -c tslint.json --project .",
     "pnpm-registry-mock": "pnpm-registry-mock",
     "test:tap": "ts-node test",
     "test:e2e": "npm-run-all -p -r pnpm-registry-mock test:tap",
