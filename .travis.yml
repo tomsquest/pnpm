@@ -11,7 +11,7 @@ cache:
 
 sudo: false
 before_install:
-  - npm install -g pnpm
+  - npm install -g pnpm@next
 install:
   - pnpm install
 script:
