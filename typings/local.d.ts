@@ -123,7 +123,7 @@ declare module 'path-name' {
   export = anything;
 }
 
-declare module '@zkochan/cmd-shim' {
+declare module 'cmd-shim' {
   const anything: any;
   export = anything;
 }

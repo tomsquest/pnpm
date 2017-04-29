@@ -6,10 +6,13 @@ import safeReadPkg from '../fs/safeReadPkg'
 import getPkgDirs from '../fs/getPkgDirs'
 import binify from '../binify'
 import isWindows = require('is-windows')
-import cmdShim = require('@zkochan/cmd-shim')
+import thenify = require('thenify')
+import cmdShimCB = require('cmd-shim')
 import logger from 'pnpm-logger'
 import Module = require('module')
-import R = require('ramda')
+import symlinkDir from 'symlink-dir'
+
+const cmdShim = thenify(cmdShimCB)
 
 const IS_WINDOWS = isWindows()
 
@@ -37,19 +40,15 @@ export async function linkPkgBins (target: string, binPath: string) {
   const cmds = await binify(pkg, target)
 
   await mkdirp(binPath)
+  const linkBin = IS_WINDOWS ? cmdShim : linkOnNonWindows
   await Promise.all(cmds.map(async cmd => {
     const externalBinPath = path.join(binPath, cmd.name)
 
-    const nodePath = (await getBinNodePaths(target)).join(path.delimiter)
-    return cmdShim(cmd.path, externalBinPath, {nodePath})
+    return linkBin(cmd.path, externalBinPath)
   }))
 }
 
-async function getBinNodePaths (target: string) {
-  const targetRealPath = await fs.realpath(target)
-
-  return R.union(
-    Module._nodeModulePaths(targetRealPath),
-    Module._nodeModulePaths(target)
-  )
+async function linkOnNonWindows (src: string, dest: string) {
+  await symlinkDir(src, dest)
+  await fs.chmod(dest, '755')
 }

@@ -479,14 +479,14 @@ test('top-level packages should find the plugins they use', async function (t) {
   t.equal(result.status, 0, 'executable exited with success')
 })
 
-test('not top-level packages should find the plugins they use', async function (t) {
+test['only']('not top-level packages should find the plugins they use', async function (t: tape.Test) {
   // standard depends on eslint and eslint plugins
   const project = prepare(t, {
     scripts: {
       test: 'standard'
     }
   })
-  await installPkgs(['standard@8.6.0'], testDefaults({ save: true }))
+  await installPkgs(['standard'], testDefaults({ save: true }))
   const result = spawnSync('npm', ['test'])
   console.log(result.stdout.toString())
   t.equal(result.status, 0, 'standard exited with success')
