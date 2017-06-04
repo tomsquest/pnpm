@@ -76,7 +76,7 @@ export default function prepare (t: Test, pkg?: Object) {
     },
     loadShrinkwrap: async () => {
       try {
-        return await loadYamlFile<any>('shrinkwrap.yaml') // tslint:disable-line
+        return await loadYamlFile<any>('node_modules_lock.yaml') // tslint:disable-line
       } catch (err) {
         if (err.code === 'ENOENT') return null
         throw err

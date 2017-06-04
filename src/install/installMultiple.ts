@@ -206,7 +206,7 @@ async function install (
   }
   if (!ctx.installs[fetchedPkg.id]) {
     if (!installable) {
-      // optional dependencies are resolved for consistent shrinkwrap.yaml files
+      // optional dependencies are resolved for consistent node_modules_lock.yaml files
       // but installed only on machines that are supported by the package
       ctx.skipped.add(fetchedPkg.id)
     }

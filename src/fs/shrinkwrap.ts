@@ -14,8 +14,8 @@ import {Package} from '../types'
 
 const shrinkwrapLogger = logger('shrinkwrap')
 
-export const SHRINKWRAP_FILENAME = 'shrinkwrap.yaml'
-export const PRIVATE_SHRINKWRAP_FILENAME = path.join('node_modules', '.shrinkwrap.yaml')
+export const SHRINKWRAP_FILENAME = 'node_modules_lock.yaml'
+export const PRIVATE_SHRINKWRAP_FILENAME = path.join('node_modules', '.node_modules_lock.yaml')
 const SHRINKWRAP_VERSION = 3
 const CREATED_WITH = `${pnpmPkgJson.name}@${pnpmPkgJson.version}`
 

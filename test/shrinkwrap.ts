@@ -63,7 +63,7 @@ test('shrinkwrap with scoped package', async t => {
     },
   })
 
-  await writeYamlFile('shrinkwrap.yaml', {
+  await writeYamlFile('node_modules_lock.yaml', {
     dependencies: {
       '@types/semver': '5.3.31',
     },
@@ -88,7 +88,7 @@ test('fail when shasum from shrinkwrap does not match with the actual one', asyn
     },
   })
 
-  await writeYamlFile('shrinkwrap.yaml', {
+  await writeYamlFile('node_modules_lock.yaml', {
     version: 3,
     registry: 'http://localhost:4873',
     dependencies: {
@@ -142,7 +142,7 @@ test('shrinkwrap not created when no deps in package.json', async t => {
 test('shrinkwrap removed when no deps in package.json', async t => {
   const project = prepare(t)
 
-  await writeYamlFile('shrinkwrap.yaml', {
+  await writeYamlFile('node_modules_lock.yaml', {
     version: 3,
     registry: 'http://localhost:4873',
     dependencies: {
@@ -162,7 +162,7 @@ test('shrinkwrap removed when no deps in package.json', async t => {
   t.ok(!await project.loadShrinkwrap(), 'shrinkwrap file removed')
 })
 
-test('respects shrinkwrap.yaml for top dependencies', async (t: tape.Test) => {
+test('respects node_modules_lock.yaml for top dependencies', async (t: tape.Test) => {
   const project = prepare(t)
 
   await addDistTag('dep-of-pkg-with-1-dep', '100.0.0', 'latest')
@@ -178,7 +178,7 @@ test('respects shrinkwrap.yaml for top dependencies', async (t: tape.Test) => {
   await project.storeHasNot('dep-of-pkg-with-1-dep', '100.1.0')
 })
 
-test('subdeps are updated on repeat install if outer shrinkwrap.yaml does not match the inner one', async (t: tape.Test) => {
+test('subdeps are updated on repeat install if outer node_modules_lock.yaml does not match the inner one', async (t: tape.Test) => {
   const project = prepare(t)
 
   await addDistTag('dep-of-pkg-with-1-dep', '100.0.0', 'latest')
@@ -201,7 +201,7 @@ test('subdeps are updated on repeat install if outer shrinkwrap.yaml does not ma
 
   shr.packages['/pkg-with-1-dep/100.0.0']['dependencies']['dep-of-pkg-with-1-dep'] = '100.1.0'
 
-  await writeYamlFile('shrinkwrap.yaml', shr)
+  await writeYamlFile('node_modules_lock.yaml', shr)
 
   await install(testDefaults())
 

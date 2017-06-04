@@ -596,7 +596,7 @@ test('shrinkwrap locks npm dependencies', async function (t) {
 
   const m = project.requireModule('.localhost+4873/pkg-with-1-dep/100.0.0/node_modules/dep-of-pkg-with-1-dep/package.json')
 
-  t.equal(m.version, '100.0.0', 'dependency specified in shrinkwrap.yaml is installed')
+  t.equal(m.version, '100.0.0', 'dependency specified in node_modules_lock.yaml is installed')
 })
 
 test('self-require should work', async function (t) {

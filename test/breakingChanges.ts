@@ -92,14 +92,14 @@ async function saveModulesYaml (pnpmVersion: string, storePath: string) {
   await fs.writeFile('node_modules/.modules.yaml', `packageManager: pnpm@${pnpmVersion}\nstorePath: ${storePath}`)
 }
 
-test('fail on non-compatible shrinkwrap.yaml', async t => {
+test('fail on non-compatible node_modules_lock.yaml', async t => {
   if (isCI) {
     t.skip('this test will always fail on CI servers')
     return
   }
 
   const project = prepare(t)
-  await fs.writeFile('shrinkwrap.yaml', '')
+  await fs.writeFile('node_modules_lock.yaml', '')
 
   try {
     await installPkgs(['is-negative'], testDefaults())
@@ -109,9 +109,9 @@ test('fail on non-compatible shrinkwrap.yaml', async t => {
   }
 })
 
-test("don't fail on non-compatible shrinkwrap.yaml when forced", async t => {
+test("don't fail on non-compatible node_modules_lock.yaml when forced", async t => {
   const project = prepare(t)
-  await fs.writeFile('shrinkwrap.yaml', '')
+  await fs.writeFile('node_modules_lock.yaml', '')
 
   await installPkgs(['is-negative'], testDefaults({force: true}))
 

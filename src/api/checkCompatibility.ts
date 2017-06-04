@@ -150,7 +150,7 @@ function check (pnpmVersion: string, storePath: string, modulesPath: string) {
     throw new ModulesBreakingChangeError({
       modulesPath,
       relatedPR: 660,
-      additionalInformation: 'Information about the node_modules structure is stored in a node_modules/.shrinkwrap.yaml file instead of a node_modules/.graph.yaml file'
+      additionalInformation: 'Information about the node_modules structure is stored in a node_modules/.node_modules_lock.yaml file instead of a node_modules/.graph.yaml file'
     })
   }
   if (semver.lt(pnpmVersion, '0.64.0')) {
