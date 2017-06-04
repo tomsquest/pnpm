@@ -12,11 +12,11 @@ import logStatus from '../logging/logInstallStatus'
 import fs = require('mz/fs')
 import {Got} from '../network/got'
 import {
-  DependencyShrinkwrap,
+  DependencyLock,
   ResolvedDependencies,
   getPkgId,
   getPkgShortId,
-} from '../fs/shrinkwrap'
+} from '../fs/lockfile'
 import {Resolution, PackageSpec, PackageMeta} from '../resolve'
 import depsToSpecs from '../depsToSpecs'
 import getIsInstallable from './getIsInstallable'
@@ -97,7 +97,7 @@ export default async function installMultiple (
 
 function dependencyShrToResolution (
   pkgShortId: string,
-  depShr: DependencyShrinkwrap,
+  depShr: DependencyLock,
   registry: string
 ): Resolution {
   if (!depShr.resolution['type'] && !depShr.resolution['tarball']) {

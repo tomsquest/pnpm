@@ -6,7 +6,7 @@ import {
   pkgIdToRef,
   ResolvedDependencies,
   prune as pruneShrinkwrap,
-} from '../fs/shrinkwrap'
+} from '../fs/lockfile'
 import {DependencyTreeNodeMap, DependencyTreeNode} from './resolvePeers'
 import {Resolution} from '../resolve'
 import R = require('ramda')

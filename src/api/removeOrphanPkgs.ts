@@ -1,17 +1,17 @@
 import rimraf = require('rimraf-then')
 import path = require('path')
 import {
-  Shrinkwrap,
+  Lockfile,
   shortIdToFullId,
-} from '../fs/shrinkwrap'
+} from '../fs/lockfile'
 import {read as readStore, save as saveStore} from '../fs/storeController'
 import R = require('ramda')
 import {PackageSpec} from '../resolve'
 import removeTopDependency from '../removeTopDependency'
 
 export default async function removeOrphanPkgs (
-  oldShr: Shrinkwrap,
-  newShr: Shrinkwrap,
+  oldShr: Lockfile,
+  newShr: Lockfile,
   root: string,
   storePath: string
 ): Promise<string[]> {

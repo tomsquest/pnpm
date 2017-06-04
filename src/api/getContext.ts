@@ -6,8 +6,8 @@ import {StrictPnpmOptions} from '../types'
 import {
   read as readShrinkwrap,
   readPrivate as readPrivateShrinkwrap,
-  Shrinkwrap,
-} from '../fs/shrinkwrap'
+  Lockfile,
+} from '../fs/lockfile'
 import {
   read as readModules,
 } from '../fs/modulesController'
@@ -22,8 +22,8 @@ export type PnpmContext = {
   pkg: Package,
   storePath: string,
   root: string,
-  privateShrinkwrap: Shrinkwrap,
-  shrinkwrap: Shrinkwrap,
+  privateShrinkwrap: Lockfile,
+  shrinkwrap: Lockfile,
   skipped: Set<string>,
 }
 

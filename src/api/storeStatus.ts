@@ -4,7 +4,7 @@ import {PnpmOptions} from '../types'
 import extendOptions from './extendOptions'
 import getContext from './getContext'
 import untouched from '../pkgIsUntouched'
-import {shortIdToFullId} from '../fs/shrinkwrap'
+import {shortIdToFullId} from '../fs/lockfile'
 
 export default async function (maybeOpts: PnpmOptions) {
   const opts = extendOptions(maybeOpts)

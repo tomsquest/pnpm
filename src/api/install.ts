@@ -21,10 +21,10 @@ import pnpmPkgJson from '../pnpmPkgJson'
 import lock from './lock'
 import {
   save as saveShrinkwrap,
-  Shrinkwrap,
+  Lockfile,
   ResolvedDependencies,
   pkgIdToRef,
-} from '../fs/shrinkwrap'
+} from '../fs/lockfile'
 import {save as saveModules} from '../fs/modulesController'
 import mkdirp = require('mkdirp-promise')
 import createMemoize, {MemoizedFunc} from '../memoize'
@@ -59,7 +59,7 @@ export type InstallContext = {
     installable: boolean,
     parentNodeId: string,
   }[],
-  shrinkwrap: Shrinkwrap,
+  shrinkwrap: Lockfile,
   fetchingLocker: MemoizedFunc<Boolean>,
   // the IDs of packages that are not installable
   skipped: Set<string>,
@@ -401,7 +401,7 @@ function getSaveSpec(spec: PackageSpec, pkg: InstalledPackage, saveExact: boolea
   }
 }
 
-async function createInstallCmd (opts: StrictPnpmOptions, shrinkwrap: Shrinkwrap, skipped: Set<string>): Promise<InstallContext> {
+async function createInstallCmd (opts: StrictPnpmOptions, shrinkwrap: Lockfile, skipped: Set<string>): Promise<InstallContext> {
   return {
     installs: {},
     childrenIdsByParentId: {},

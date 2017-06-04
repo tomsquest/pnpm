@@ -12,24 +12,24 @@ import npa = require('npm-package-arg')
 import pnpmPkgJson from '../pnpmPkgJson'
 import {Package} from '../types'
 
-const shrinkwrapLogger = logger('shrinkwrap')
+const lockfileLogger = logger('node_modules_lock')
 
-export const SHRINKWRAP_FILENAME = 'node_modules_lock.yaml'
-export const PRIVATE_SHRINKWRAP_FILENAME = path.join('node_modules', '.node_modules_lock.yaml')
-const SHRINKWRAP_VERSION = 3
+export const LOCKFILE_FILENAME = 'node_modules_lock.yaml'
+export const PRIVATE_LOCKFILE_FILENAME = path.join('node_modules', '.node_modules_lock.yaml')
+const LOCKFILE_VERSION = 3
 const CREATED_WITH = `${pnpmPkgJson.name}@${pnpmPkgJson.version}`
 
-class ShrinkwrapBreakingChangeError extends PnpmError {
+class LockfileBreakingChangeError extends PnpmError {
   constructor (filename: string) {
-    super('SHRINKWRAP_BREAKING_CHANGE', `Shrinkwrap file ${filename} not compatible with current pnpm`)
+    super('SHRINKWRAP_BREAKING_CHANGE', `Lockfile file ${filename} not compatible with current pnpm`)
     this.filename = filename
   }
   filename: string
 }
 
-function getDefaultShrinkwrap (registry: string) {
+function getDefaultLockfile (registry: string) {
   return {
-    version: SHRINKWRAP_VERSION,
+    version: LOCKFILE_VERSION,
     createdWith: CREATED_WITH,
     specifiers: {},
     dependencies: {},
@@ -38,7 +38,7 @@ function getDefaultShrinkwrap (registry: string) {
   }
 }
 
-export type Shrinkwrap = {
+export type Lockfile = {
   version: number,
   createdWith: string,
   specifiers: ResolvedDependencies,
@@ -48,18 +48,18 @@ export type Shrinkwrap = {
 }
 
 export type ResolvedPackages = {
-  [pkgId: string]: DependencyShrinkwrap,
+  [pkgId: string]: DependencyLock,
 }
 
-export type ShrinkwrapResolution = Resolution | {
+export type ResolutionLock = Resolution | {
   integrity: string,
 }
 
-export type DependencyShrinkwrap = {
+export type DependencyLock = {
   id?: string,
   dev?: true,
   optional?: true,
-  resolution: ShrinkwrapResolution,
+  resolution: ResolutionLock,
   dependencies?: ResolvedDependencies,
 }
 
@@ -78,25 +78,25 @@ export async function readPrivate (
     force: boolean,
     registry: string,
   }
-): Promise<Shrinkwrap> {
-  const shrinkwrapPath = path.join(pkgPath, PRIVATE_SHRINKWRAP_FILENAME)
-  let shrinkwrap
+): Promise<Lockfile> {
+  const lockfilePath = path.join(pkgPath, PRIVATE_LOCKFILE_FILENAME)
+  let lockfile
   try {
-    shrinkwrap = await loadYamlFile<Shrinkwrap>(shrinkwrapPath)
+    lockfile = await loadYamlFile<Lockfile>(lockfilePath)
   } catch (err) {
     if ((<NodeJS.ErrnoException>err).code !== 'ENOENT') {
       throw err
     }
-    return getDefaultShrinkwrap(opts.registry)
+    return getDefaultLockfile(opts.registry)
   }
-  if (shrinkwrap && shrinkwrap.version === SHRINKWRAP_VERSION) {
-    return shrinkwrap
+  if (lockfile && lockfile.version === LOCKFILE_VERSION) {
+    return lockfile
   }
   if (opts.force || isCI) {
-    shrinkwrapLogger.warn(`Ignoring not compatible shrinkwrap file at ${shrinkwrapPath}`)
-    return getDefaultShrinkwrap(opts.registry)
+    lockfileLogger.warn(`Ignoring not compatible lockfile file at ${lockfilePath}`)
+    return getDefaultLockfile(opts.registry)
   }
-  throw new ShrinkwrapBreakingChangeError(shrinkwrapPath)
+  throw new LockfileBreakingChangeError(lockfilePath)
 }
 
 export async function read (
@@ -104,36 +104,36 @@ export async function read (
   opts: {
     force: boolean,
     registry: string,
-}): Promise<Shrinkwrap> {
-  const shrinkwrapPath = path.join(pkgPath, SHRINKWRAP_FILENAME)
-  let shrinkwrap
+}): Promise<Lockfile> {
+  const lockfilePath = path.join(pkgPath, LOCKFILE_FILENAME)
+  let lockfile
   try {
-    shrinkwrap = await loadYamlFile<Shrinkwrap>(shrinkwrapPath)
+    lockfile = await loadYamlFile<Lockfile>(lockfilePath)
   } catch (err) {
     if ((<NodeJS.ErrnoException>err).code !== 'ENOENT') {
       throw err
     }
-    return getDefaultShrinkwrap(opts.registry)
+    return getDefaultLockfile(opts.registry)
   }
-  if (shrinkwrap && shrinkwrap.version === SHRINKWRAP_VERSION) {
-    return shrinkwrap
+  if (lockfile && lockfile.version === LOCKFILE_VERSION) {
+    return lockfile
   }
   if (opts.force || isCI) {
-    shrinkwrapLogger.warn(`Ignoring not compatible shrinkwrap file at ${shrinkwrapPath}`)
-    return getDefaultShrinkwrap(opts.registry)
+    lockfileLogger.warn(`Ignoring not compatible lockfile file at ${lockfilePath}`)
+    return getDefaultLockfile(opts.registry)
   }
-  throw new ShrinkwrapBreakingChangeError(shrinkwrapPath)
+  throw new LockfileBreakingChangeError(lockfilePath)
 }
 
-export function save (pkgPath: string, shrinkwrap: Shrinkwrap) {
-  const shrinkwrapPath = path.join(pkgPath, SHRINKWRAP_FILENAME)
-  const privateShrinkwrapPath = path.join(pkgPath, PRIVATE_SHRINKWRAP_FILENAME)
+export function save (pkgPath: string, lockfile: Lockfile) {
+  const lockfilePath = path.join(pkgPath, LOCKFILE_FILENAME)
+  const privateLockfilePath = path.join(pkgPath, PRIVATE_LOCKFILE_FILENAME)
 
-  // empty shrinkwrap is not saved
-  if (Object.keys(shrinkwrap.dependencies).length === 0) {
+  // empty lockfile is not saved
+  if (Object.keys(lockfile.dependencies).length === 0) {
     return Promise.all([
-      rimraf(shrinkwrapPath),
-      rimraf(privateShrinkwrapPath),
+      rimraf(lockfilePath),
+      rimraf(privateLockfilePath),
     ])
   }
 
@@ -144,54 +144,54 @@ export function save (pkgPath: string, shrinkwrap: Shrinkwrap) {
   }
 
   return Promise.all([
-    writeYamlFile(shrinkwrapPath, shrinkwrap, formatOpts),
-    writeYamlFile(privateShrinkwrapPath, shrinkwrap, formatOpts),
+    writeYamlFile(lockfilePath, lockfile, formatOpts),
+    writeYamlFile(privateLockfilePath, lockfile, formatOpts),
   ])
 }
 
-export function prune (shr: Shrinkwrap, pkg: Package): Shrinkwrap {
+export function prune (lockfile: Lockfile, pkg: Package): Lockfile {
   const packages: ResolvedPackages = {}
   const optionalDependencies = R.keys(pkg.optionalDependencies)
   const dependencies = R.difference(R.keys(pkg.dependencies), optionalDependencies)
   const devDependencies = R.difference(R.difference(R.keys(pkg.devDependencies), optionalDependencies), dependencies)
-  copyDependencyTree(packages, shr, {
-    registry: shr.registry,
+  copyDependencyTree(packages, lockfile, {
+    registry: lockfile.registry,
     dependencies: devDependencies,
     dev: true,
   })
-  copyDependencyTree(packages, shr, {
-    registry: shr.registry,
+  copyDependencyTree(packages, lockfile, {
+    registry: lockfile.registry,
     dependencies: optionalDependencies,
     optional: true,
   })
-  copyDependencyTree(packages, shr, {
-    registry: shr.registry,
+  copyDependencyTree(packages, lockfile, {
+    registry: lockfile.registry,
     dependencies,
   })
 
   const allDeps = R.reduce(R.union, [], [optionalDependencies, devDependencies, dependencies])
   const specifiers: ResolvedDependencies = {}
-  const shrDependencies: ResolvedDependencies = {}
+  const allDependencies: ResolvedDependencies = {}
 
-  R.keys(shr.specifiers).forEach(depName => {
+  R.keys(lockfile.specifiers).forEach(depName => {
     if (allDeps.indexOf(depName) === -1) return
-    specifiers[depName] = shr.specifiers[depName]
-    shrDependencies[depName] = shr.dependencies[depName]
+    specifiers[depName] = lockfile.specifiers[depName]
+    allDependencies[depName] = lockfile.dependencies[depName]
   })
 
   return {
-    version: SHRINKWRAP_VERSION,
-    createdWith: shr.createdWith || CREATED_WITH,
+    version: LOCKFILE_VERSION,
+    createdWith: lockfile.createdWith || CREATED_WITH,
     specifiers,
-    registry: shr.registry,
-    dependencies: shrDependencies,
+    registry: lockfile.registry,
+    dependencies: allDependencies,
     packages,
   }
 }
 
 function copyDependencyTree (
   resolvedPackages: ResolvedPackages,
-  shr: Shrinkwrap,
+  lockfile: Lockfile,
   opts: {
     registry: string,
     dependencies: string[],
@@ -200,7 +200,7 @@ function copyDependencyTree (
   }
 ): ResolvedPackages {
   let pkgIds: string[] = opts.dependencies
-    .map((pkgName: string) => getPkgShortId(shr.dependencies[pkgName], pkgName))
+    .map((pkgName: string) => getPkgShortId(lockfile.dependencies[pkgName], pkgName))
   const checked = new Set<string>()
 
   while (pkgIds.length) {
@@ -208,11 +208,11 @@ function copyDependencyTree (
     for (let pkgId of pkgIds) {
       if (checked.has(pkgId)) continue
       checked.add(pkgId)
-      if (!shr.packages[pkgId]) {
-        logger.warn(`Cannot find resolution of ${pkgId} in shrinkwrap file`)
+      if (!lockfile.packages[pkgId]) {
+        logger.warn(`Cannot find resolution of ${pkgId} in lockfile file`)
         continue
       }
-      const depShr = shr.packages[pkgId]
+      const depShr = lockfile.packages[pkgId]
       resolvedPackages[pkgId] = depShr
       if (opts.optional) {
         depShr.optional = true

@@ -7,10 +7,9 @@ import extendOptions from './extendOptions'
 import {PnpmOptions, StrictPnpmOptions, Package} from '../types'
 import lock from './lock'
 import {
-  Shrinkwrap,
   save as saveShrinkwrap,
   prune as pruneShrinkwrap,
-} from '../fs/shrinkwrap'
+} from '../fs/lockfile'
 import {
   save as saveModules
 } from '../fs/modulesController'

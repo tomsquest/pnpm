@@ -14,7 +14,7 @@ import {Resolution} from '../resolve'
 import resolvePeers, {DependencyTreeNode, DependencyTreeNodeMap} from './resolvePeers'
 import logStatus from '../logging/logInstallStatus'
 import updateShrinkwrap from './updateShrinkwrap'
-import {Shrinkwrap, shortIdToFullId, DependencyShrinkwrap} from '../fs/shrinkwrap'
+import {Lockfile, shortIdToFullId, DependencyLock} from '../fs/lockfile'
 import removeOrphanPkgs from '../api/removeOrphanPkgs'
 
 export default async function (
@@ -27,8 +27,8 @@ export default async function (
     baseNodeModules: string,
     bin: string,
     topParents: {name: string, version: string}[],
-    shrinkwrap: Shrinkwrap,
-    privateShrinkwrap: Shrinkwrap,
+    shrinkwrap: Lockfile,
+    privateShrinkwrap: Lockfile,
     production: boolean,
     root: string,
     storePath: string,
@@ -37,7 +37,7 @@ export default async function (
   }
 ): Promise<{
   linkedPkgsMap: DependencyTreeNodeMap,
-  shrinkwrap: Shrinkwrap,
+  shrinkwrap: Lockfile,
   newPkgResolvedIds: string[],
 }> {
   const topPkgIds = topPkgs.map(pkg => pkg.id)
@@ -80,14 +80,14 @@ export default async function (
 }
 
 function filterShrinkwrap (
-  shr: Shrinkwrap,
+  shr: Lockfile,
   opts: {
     noDev: boolean,
     noOptional: boolean,
     skipped: Set<string>,
   }
-): Shrinkwrap {
-  let pairs = R.toPairs<string, DependencyShrinkwrap>(shr.packages)
+): Lockfile {
+  let pairs = R.toPairs<string, DependencyLock>(shr.packages)
     .filter(pair => !opts.skipped.has(pair[1].id || shortIdToFullId(pair[0], shr.registry)))
   if (opts.noDev) {
     pairs = pairs.filter(pair => !pair[1].dev)
@@ -101,12 +101,12 @@ function filterShrinkwrap (
     registry: shr.registry,
     specifiers: shr.specifiers,
     packages: R.fromPairs(pairs),
-  } as Shrinkwrap
+  } as Lockfile
 }
 
 async function linkNewPackages (
-  privateShrinkwrap: Shrinkwrap,
-  shrinkwrap: Shrinkwrap,
+  privateShrinkwrap: Lockfile,
+  shrinkwrap: Lockfile,
   pkgsToLink: DependencyTreeNodeMap,
   opts: {
     force: boolean,
