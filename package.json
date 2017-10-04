@@ -9,14 +9,14 @@
     "twitter": "ZoltanKochan"
   },
   "bin": {
-    "pnpm": "lib/bin/pnpm.js"
+    "pnpm": "dist/bin/pnpm.js"
   },
   "bugs": {
     "url": "https://github.com/pnpm/pnpm/issues"
   },
-  "main": "lib/bin/pnpm.js",
+  "main": "dist/bin/pnpm.js",
   "files": [
-    "lib/"
+    "dist"
   ],
   "dependencies": {
     "@pnpm/outdated": "^0.0.1",
@@ -102,11 +102,12 @@
     "info": "npm-scripts-info",
     "start": "npm run tsc -- --watch",
     "?commit": "echo 'Run Git commit wizard'",
+    "precommit": "npm run tsc && git add dist",
     "commit": "commit",
     "commitmsg": "commitlint -e",
     "lint": "tslint -c tslint.json --project .",
     "test": "npm run tsc && npm run lint && cd test && npm test",
-    "tsc": "rimraf lib && tsc",
+    "tsc": "rimraf dist && tsc",
     "prepublishOnly": "npm run tsc"
   },
   "publishconfig": {

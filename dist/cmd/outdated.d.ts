@@ -1,0 +1,23 @@
+export default function (args: string[], opts: {
+    prefix: string;
+    global: boolean;
+    independentLeaves: boolean;
+    offline: boolean;
+    store: string;
+    proxy?: string;
+    httpsProxy?: string;
+    localAddress?: string;
+    cert?: string;
+    key?: string;
+    ca?: string;
+    strictSsl: boolean;
+    fetchRetries: number;
+    fetchRetryFactor: number;
+    fetchRetryMintimeout: number;
+    fetchRetryMaxtimeout: number;
+    userAgent: string;
+    tag: string;
+    networkConcurrency: number;
+    rawNpmConfig: Object;
+    alwaysAuth: boolean;
+}, command: string): Promise<void>;

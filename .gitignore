@@ -13,8 +13,6 @@ fixtures
 .tmp
 _docpress
 
-lib
-
 # Visual Studio Code configs
 .vscode/
 

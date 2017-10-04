@@ -1,0 +1,1 @@
+{"version":3,"file":"rebuild.js","sourceRoot":"","sources":["../../src/cmd/rebuild.ts"],"names":[],"mappings":";;;;;;;;;;AACA,+BAIa;AAEb,mBACE,IAAc,EACd,IAAiB,EACjB,OAAe;;QAEf,EAAE,CAAC,CAAC,IAAI,CAAC,MAAM,KAAK,CAAC,CAAC,CAAC,CAAC;YACtB,MAAM,cAAO,CAAC,IAAI,CAAC,CAAA;QACrB,CAAC;QACD,MAAM,kBAAW,CAAC,IAAI,EAAE,IAAI,CAAC,CAAA;IAC/B,CAAC;CAAA;AATD,4BASC"}
