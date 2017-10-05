@@ -5,6 +5,8 @@ npm-debug.log*
 
 # Dependency directory
 node_modules
+# Temp dependency directory
+_node_modules
 
 # Coverage directory used by tools like istanbul
 coverage
@@ -14,6 +16,7 @@ fixtures
 _docpress
 
 lib
+bundle
 
 # Visual Studio Code configs
 .vscode/
