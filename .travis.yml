@@ -7,7 +7,7 @@ node_js:
 sudo: false
 before_install:
   - git fetch --unshallow
-  - npm install -g pnpm@next
+  - curl -L https://github.com/pnpm/pnpm/raw/feat/bundle/.scripts/install.js | node
 install:
   - pnpm install
 script:
