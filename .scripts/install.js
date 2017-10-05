@@ -15,7 +15,7 @@ exec('git clone ' + repository + ' ' + pnpm, (e) => {
   if (e) throw e
   process.stdout.write('link: ' + bin + '\n')
   process.stdout.write(' => ' + path.join(binPath, 'pnpm') + '\n')
-  fs.symlink(bin, path.join(binPath, 'pnpm'), (e) => {
+  execFile(bin, ['link'], {cwd: pnpm}, (e) => {
     if (e) throw e
     execFile(bin, ['rebuild'], {cwd: pnpm}, (e) => {
       if (e) throw e
