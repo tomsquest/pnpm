@@ -7,7 +7,7 @@ node_js:
 sudo: false
 before_install:
   - git fetch --unshallow
-  - npm install -g pnpm@next
+  - npm install -g @zkochan/pnpm@next
 install:
   - pnpm install
 script:
