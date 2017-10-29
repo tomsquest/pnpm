@@ -59,7 +59,7 @@
     "@types/ramda": "^0.24.16",
     "@types/tape": "^4.2.30",
     "@types/update-notifier": "^1.0.2",
-    "@zkochan/husky": "^0.0.0",
+    "husky": "^0.15.0-beta.11",
     "npm-scripts-info": "^0.3.6",
     "rimraf": "^2.5.4",
     "tslint": "^5.4.2",
@@ -106,13 +106,17 @@
     "start": "npm run tsc -- --watch",
     "?commit": "echo 'Run Git commit wizard'",
     "commit": "commit",
-    "commitmsg": "commitlint -e",
     "lint": "tslint -c tslint.json --project .",
     "test": "npm run tsc && npm run lint && npm test --prefix .scripts/self-installer && npm test --prefix test",
     "tsc": "rimraf lib && tsc",
     "prepublishOnly": "echo \"Publish is only allowed via 'npm run release'\" && exit 1",
     "release": "sh .scripts/release.sh",
     "version": "sh .scripts/version.sh"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e"
+    }
   },
   "publishconfig": {
     "tag": "next"

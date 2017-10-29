@@ -35,7 +35,7 @@ devDependencies:
   '@types/ramda': 0.24.18
   '@types/tape': 4.2.31
   '@types/update-notifier': 1.0.2
-  '@zkochan/husky': 0.0.0
+  husky: 0.15.0-beta.11
   npm-scripts-info: 0.3.6
   rimraf: 2.6.2
   tslint: 5.8.0
@@ -223,16 +223,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-BDy1oz6aFYyY73618IkXzJzFghnXwVZDc3SVa6MVKTrrk4RgubahAF5yKK+Mx4a78tfO0OHeZnJKPs0pNy5uNA==
-  /@zkochan/husky/0.0.0:
-    dependencies:
-      is-ci: 1.0.10
-      normalize-path: 1.0.0
-      strip-indent: 2.0.0
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-onS0BpZl/Zj903N60DM58rENRH9qZPWUALc4M808CG7Kv2M6BHz1W4XREg1vivAYaD3z2Hd9O2iEy3SJlALnbg==
   /@zkochan/libnpx/9.6.1:
     dependencies:
       dotenv: 4.0.0
@@ -1223,7 +1213,6 @@ packages:
       p-finally: 1.0.0
       signal-exit: 3.0.2
       strip-eof: 1.0.0
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -1624,6 +1613,18 @@ packages:
     dev: false
     resolution:
       integrity: sha1-xG4xWaKT9riW2ikxbYtv6Lt5u+0=
+  /husky/0.15.0-beta.11:
+    dependencies:
+      execa: 0.8.0
+      is-ci: 1.0.10
+      pkg-dir: 2.0.0
+      pupa: 1.0.0
+      read-pkg: 2.0.0
+      run-node: 0.1.1
+      slash: 1.0.0
+    dev: true
+    resolution:
+      integrity: sha512-ZTa8yVw/pJJWDCiUYXqvUVpcI2t+ZseVSHA1wgARHMTRYUJfM0PFpW5V41gF+2LU5NF1U+Dsb6ekgox6ToRVqQ==
   /iconv-lite/0.4.19:
     dev: false
     engines:
@@ -2034,7 +2035,6 @@ packages:
       parse-json: 2.2.0
       pify: 2.3.0
       strip-bom: 3.0.0
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -2418,12 +2418,6 @@ packages:
       validate-npm-package-license: 3.0.1
     resolution:
       integrity: sha512-9jjUFbTPfEy3R/ad/2oNbKtW9Hgovl5O1FvFWKkKblNXoN/Oou6+9+KKohPK13Yc3/TyunyWhJp6gvRNR/PPAw==
-  /normalize-path/1.0.0:
-    dev: true
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-MtDkcvkf80VwHBWoMRAY07CpA3k=
   /normalize-path/2.1.1:
     dependencies:
       remove-trailing-separator: 1.1.0
@@ -2975,7 +2969,6 @@ packages:
   /path-type/2.0.0:
     dependencies:
       pify: 2.3.0
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -3020,6 +3013,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
+  /pkg-dir/2.0.0:
+    dependencies:
+      find-up: 2.1.0
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-9tXREJ4Z1j7fQo4L1X4Sd3YVM0s=
   /pnpm-default-reporter/0.9.6:
     dependencies:
       '@types/chalk': 0.4.31
@@ -3215,6 +3216,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-wNWmOycYgArY4esPpSachN1BhF4=
+  /pupa/1.0.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-mpVopa9+ZXuEYqbp1TKHQ1YM7/Y=
   /q/1.5.1:
     dev: true
     engines:
@@ -3324,7 +3331,6 @@ packages:
       load-json-file: 2.0.0
       normalize-package-data: 2.4.0
       path-type: 2.0.0
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -3577,6 +3583,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-yK1KXhEGYeQCp9IbUw4AnyX444k=
+  /run-node/0.1.1:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-GC7prNmjt6xebPdnnVwzoTYMe28=
   /run-queue/1.0.3:
     dependencies:
       aproba: 1.2.0
@@ -3647,7 +3659,6 @@ packages:
     resolution:
       integrity: sha1-6XVe2kB+ltpAxeUVjJ6jezO+y+s=
   /slash/1.0.0:
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
@@ -3840,7 +3851,6 @@ packages:
     resolution:
       integrity: sha1-YhmoVhZSBJHzV4i9vxRHqZx+aw4=
   /strip-bom/3.0.0:
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -3864,12 +3874,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-DHlipq3vp7vUrDZkYKY4VSrhoKI=
-  /strip-indent/2.0.0:
-    dev: true
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha1-XvjbKV0B5u1sv3qrlpmNeCJSe2g=
   /strip-json-comments/2.0.1:
     dev: false
     engines:
@@ -4494,7 +4498,6 @@ specifiers:
   '@types/ramda': ^0.24.16
   '@types/tape': ^4.2.30
   '@types/update-notifier': ^1.0.2
-  '@zkochan/husky': ^0.0.0
   '@zkochan/libnpx': ^9.6.1
   byline: ^5.0.0
   camelcase: ^4.1.0
@@ -4502,6 +4505,7 @@ specifiers:
   common-tags: ^1.4.0
   cross-spawn: ^5.0.0
   graceful-fs: ^4.1.11
+  husky: ^0.15.0-beta.11
   is-ci: ^1.0.10
   load-json-file: ^3.0.0
   loud-rejection: ^1.6.0
