@@ -33,7 +33,7 @@ devDependencies:
   '@types/mz': 0.0.31
   '@types/node': 8.0.51
   '@types/nopt': 3.0.29
-  '@types/ramda': 0.25.4
+  '@types/ramda': 0.25.5
   '@types/semver': 5.4.0
   '@types/tape': 4.2.31
   '@types/update-notifier': 1.0.2
@@ -277,9 +277,9 @@ packages:
     dev: false
     resolution:
       integrity: sha512-37umDB+zS6tK+3j0YJxsl7O8T4aYHYO6s1UpADJ/nxMHFjmuSd5XRQryC4IXX3HQ4XzstqAqhk/D+cdxwvqtEQ==
-  /@types/ramda/0.25.4:
+  /@types/ramda/0.25.5:
     resolution:
-      integrity: sha512-UNYKON+MMl7unB3jgS1GKGQQUJLfyOVJbEI0vsAwdd3aJqXaz3GuxCLLcur6NntZxb1ufKfsv4FcR6rvQHin+A==
+      integrity: sha512-t0fA96x1DktA/yYfiDrX7sBaMR1JVP7xkluCuSvwGLEC3fX4/QUoq3zyvIt2Hn4QS1LPmQ5NCEvCtxYtbt8BFw==
   /@types/rc/0.0.1:
     dev: false
     resolution:
@@ -2829,16 +2829,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-GZKfZMQJPS0ucHWh2tivWcKWuNE=
-  /log-update/2.3.0:
-    dependencies:
-      ansi-escapes: 3.0.0
-      cli-cursor: 2.1.0
-      wrap-ansi: 3.0.1
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha1-iDKP19HOeTiykoN0bwsbwSayRwg=
   /longest/1.0.1:
     dev: true
     engines:
@@ -3723,7 +3713,7 @@ packages:
     dependencies:
       '@types/load-json-file': 2.0.7
       '@types/node': 8.0.51
-      '@types/ramda': 0.25.4
+      '@types/ramda': 0.25.5
       '@types/retry': 0.10.2
       '@types/semver': 5.4.0
       credentials-by-uri: 1.0.0
@@ -3974,7 +3964,7 @@ packages:
       '@types/ramda': 0.24.18
       chalk: 2.3.0
       common-tags: 1.4.0
-      log-update: 2.3.0
+      log-update: github.com/zkochan/log-update/b7fef997a718c08811ba451a4705167342383ac0
       ndjson: 1.5.0
       pretty-bytes: 4.0.2
       ramda: 0.25.0
@@ -4009,7 +3999,7 @@ packages:
     dependencies:
       '@types/archy': 0.0.31
       '@types/node': 8.0.51
-      '@types/ramda': 0.25.4
+      '@types/ramda': 0.25.5
       archy: 1.0.0
       chalk: 2.3.0
       dependencies-hierarchy: 2.0.0
@@ -5027,7 +5017,7 @@ packages:
       '@types/nopt': 3.0.29
       '@types/npm': 2.0.29
       '@types/p-series': 1.0.1
-      '@types/ramda': 0.25.4
+      '@types/ramda': 0.25.5
       '@types/rc': 0.0.1
       '@types/semver': 5.4.0
       '@types/update-notifier': 1.0.2
@@ -5785,6 +5775,18 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-5a2ryKz0CPY4X8dklWhMiOavaJo=
+  github.com/zkochan/log-update/b7fef997a718c08811ba451a4705167342383ac0:
+    dependencies:
+      ansi-escapes: 3.0.0
+      cli-cursor: 2.1.0
+      wrap-ansi: 3.0.1
+    dev: false
+    engines:
+      node: '>=4'
+    name: log-update
+    resolution:
+      tarball: 'https://codeload.github.com/zkochan/log-update/tar.gz/b7fef997a718c08811ba451a4705167342383ac0'
+    version: 2.3.0
 registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 2
 shrinkwrapVersion: 3
