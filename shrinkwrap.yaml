@@ -11,6 +11,7 @@ dependencies:
   chalk: 2.3.0
   common-tags: 1.5.1
   cross-spawn: 5.1.0
+  find-packages: 2.1.2
   graceful-fs: 4.1.11
   is-ci: 1.0.10
   load-json-file: 4.0.0
@@ -18,13 +19,16 @@ dependencies:
   mkdirp-promise: 5.0.1
   nopt: 4.0.1
   not-bundled-npm: 5.5.1
+  p-limit: 1.1.0
   package-store: 0.12.0
   path-name: 1.0.0
+  pkgs-graph: 1.1.1
   pnpm-default-reporter: 0.10.3
   pnpm-file-reporter: 0.0.1
   pnpm-list: 2.0.0
   ramda: 0.25.0
   signal-exit: 3.0.2
+  sort-pkgs: 1.0.2
   strip-color: 0.1.0
   supi: 0.7.14
   text-table: 0.2.0
@@ -825,8 +829,21 @@ packages:
     dev: true
     resolution:
       integrity: sha1-FziZ0//Rx9k4PkR5Ul2+J4yrXys=
+  /array-union/1.0.2:
+    dependencies:
+      array-uniq: 1.0.3
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-mjRBDk9OPaI96jdb5b5w8kd47Dk=
+  /array-uniq/1.0.3:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-r2rId6Jcx/dOBYiUdThY39sk/bY=
   /arrify/1.0.1:
-    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -1750,6 +1767,15 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-lxYQEEebR4G/uGaubo5TBi9H6FJGSR8zJGyt5AhFHbmWyH73e+EenuntCytzKcDpPl2K2v2slXUTY9Ch39kKRQ==
+  /dir-glob/2.0.0:
+    dependencies:
+      arrify: 1.0.1
+      path-type: 3.0.0
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-37qirFDz8cA5fimp9feo43fSuRo2gHwaIn6dXL8Ber1dGwUosDrGZeCCXq57WnIqE4aQ+u3eQZzsk1yOzhdwag==
   /dom-walk/0.1.1:
     dev: true
     resolution:
@@ -2097,6 +2123,17 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-3lcasU5kFaqBp/IJ19lDRv5I0FG42J94s2oIP5r0KA5z5+ID0vocMylMUEuuGbXqJ5WLNZteQB9CAVIzUnk9bQ==
+  /find-packages/2.1.2:
+    dependencies:
+      '@types/node': 8.5.1
+      globby: 7.1.1
+      p-filter: 1.0.0
+      read-pkg: 3.0.0
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-MAvczPUZMCFeofTSX6kLmSPPFz8TMoLf9w4fsVI07mdBKdRsBF6R33W0S06wn73+nY0g3WtTh9SPp33/zl4jUQ==
   /find-up/1.1.2:
     dependencies:
       path-exists: 2.1.0
@@ -2344,6 +2381,19 @@ packages:
     dev: true
     resolution:
       integrity: sha1-52mJJopsdMOJCLEwWxD8DjlOnQ8=
+  /globby/7.1.1:
+    dependencies:
+      array-union: 1.0.2
+      dir-glob: 2.0.0
+      glob: 7.1.2
+      ignore: 3.3.7
+      pify: 3.0.0
+      slash: 1.0.0
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha1-+yzP+UAfhgCUXfral0QMypcrhoA=
   /got/6.7.1:
     dependencies:
       create-error-class: 3.0.2
@@ -2565,6 +2615,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-DTVlMx3IYPe0/JJcYP7Gxg7ttZZu3IInhuEhbchuqneY9wWe5Ojy2mXLBaQFUQmo0AW2r3qG7m1mg86js+gnlQ==
+  /ignore/3.3.7:
+    dev: false
+    resolution:
+      integrity: sha512-YGG3ejvBNHRqu0559EOxxNFihD0AjpvHlC/pdGKd3X3ofe+CoJkYazwNJYTNebqpPKN+VVQbh4ZFn1DivMNuHA==
   /import-lazy/2.1.0:
     dev: false
     engines:
@@ -4311,7 +4365,6 @@ packages:
   /path-type/3.0.0:
     dependencies:
       pify: 3.0.0
-    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -4361,6 +4414,24 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha1-tUGO8EOd5UJfxJlQQtztFPsqhP8=
+  /pkgs-graph/1.1.1:
+    dependencies:
+      '@types/common-tags': 1.4.0
+      '@types/node': 8.5.1
+      '@types/ramda': 0.25.8
+      '@types/semver': 5.4.0
+      chalk: 2.3.0
+      common-tags: 1.5.1
+      find-packages: 2.1.2
+      npm-package-arg: 6.0.0
+      ramda: 0.25.0
+      semver: 5.4.1
+      toposort: 1.0.6
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-7zQ8B3SDUW9uN1TZykNq+PBLhYplPw14HvmV1HG6IOT8aXNgPVq125xhq90OgpcSs4ZwW5mESjXDUaQMHUQ43A==
   /pnpm-default-reporter/0.10.3:
     dependencies:
       '@types/common-tags': 1.4.0
@@ -4748,7 +4819,6 @@ packages:
       load-json-file: 4.0.0
       normalize-package-data: 2.4.0
       path-type: 3.0.0
-    dev: true
     engines:
       node: '>=4'
     resolution:
@@ -5215,6 +5285,13 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-ZYU1WEhh7JfXMNbPQYIuH1ZoQSg=
+  /sort-pkgs/1.0.2:
+    dependencies:
+      ramda: 0.25.0
+      toposort: 1.0.6
+    dev: false
+    resolution:
+      integrity: sha512-JUvjD353qQEtcNtsXYQZi2cumBSoWPWU+N1b1va0CYxUpT1gSyxKds9tVzRu+OLluN13TckevYwXKWyiQv5KfQ==
   /sorted-object/2.0.1:
     dev: false
     resolution:
@@ -5698,6 +5775,10 @@ packages:
       node: '>=0.10.40'
     resolution:
       integrity: sha1-6ddRYV0buH3IZdsYL6HKCl71NtU=
+  /toposort/1.0.6:
+    dev: false
+    resolution:
+      integrity: sha1-wxdI5V0hDv/AD9zcfW5o19e7nOw=
   /tough-cookie/2.3.3:
     dependencies:
       punycode: 1.4.1
@@ -6320,6 +6401,7 @@ specifiers:
   delay: ^2.0.0
   execa: ^0.7.0
   exists-link: ^2.0.0
+  find-packages: ^2.1.2
   graceful-fs: ^4.1.11
   is-ci: ^1.0.10
   is-windows: ^1.0.1
@@ -6336,10 +6418,12 @@ specifiers:
   npm-registry-client: ^8.4.0
   npm-run-all: ^4.0.1
   npm-scripts-info: ^0.3.6
+  p-limit: ^1.1.0
   package-preview: ^1.0.0
   package-store: ^0.12.0
   path-exists: ^3.0.0
   path-name: ^1.0.0
+  pkgs-graph: ^1.1.1
   pnpm-default-reporter: ^0.10.3
   pnpm-file-reporter: ^0.0.1
   pnpm-list: ^2.0.0
@@ -6351,6 +6435,7 @@ specifiers:
   semver: ^5.3.0
   sepia: ^2.0.2
   signal-exit: ^3.0.2
+  sort-pkgs: ^1.0.2
   strip-color: ^0.1.0
   supi: ^0.7.14
   tape: ^4.6.3
