@@ -23,7 +23,7 @@ dependencies:
   package-store: 0.12.0
   path-name: 1.0.0
   pkgs-graph: 1.1.1
-  pnpm-default-reporter: 0.10.3
+  pnpm-default-reporter: 0.10.4
   pnpm-file-reporter: 0.0.1
   pnpm-list: 2.0.0
   ramda: 0.25.0
@@ -4432,7 +4432,7 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-7zQ8B3SDUW9uN1TZykNq+PBLhYplPw14HvmV1HG6IOT8aXNgPVq125xhq90OgpcSs4ZwW5mESjXDUaQMHUQ43A==
-  /pnpm-default-reporter/0.10.3:
+  /pnpm-default-reporter/0.10.4:
     dependencies:
       '@types/common-tags': 1.4.0
       '@types/node': 8.0.58
@@ -4453,7 +4453,7 @@ packages:
     peerDependencies:
       supi: ^0.7.0
     resolution:
-      integrity: sha512-GnD07kBIdxysvgnGuRJvHhJnpXhklYWYEfMx26q+MmuJT4zdRHdv9X8hvPXWtDf7EXJn3efqb6OuJRzygh46/A==
+      integrity: sha512-BbM++Cs63bpay4FISd+cIDbW+aSZxhl82qsqwYCYQfuMXxyDQ5PDzcU2LUNlZ3A8nmRdfzJACXPFw9EDxe9KSg==
   /pnpm-file-reporter/0.0.1:
     dependencies:
       '@types/chalk': 0.4.31
@@ -6424,7 +6424,7 @@ specifiers:
   path-exists: ^3.0.0
   path-name: ^1.0.0
   pkgs-graph: ^1.1.1
-  pnpm-default-reporter: ^0.10.3
+  pnpm-default-reporter: ^0.10.4
   pnpm-file-reporter: ^0.0.1
   pnpm-list: ^2.0.0
   pnpm-registry-mock: ^1.5.0
